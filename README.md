@@ -56,3 +56,4 @@ go run main.go
 ## Planned improvements
 - Usage of goroutines
 - Add keyboard input to pause/quit
+- Creating test case packages and making simple CI/CD pipeline
