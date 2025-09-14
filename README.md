@@ -33,7 +33,7 @@ GameOfLife/
 ```
 
 ## How to run?
-### 1. Clone the repositorz
+### 1. Clone the repository
 ```bash
 git clone https://github.com/goretante/GameOfLife
 cd GameOfLife
