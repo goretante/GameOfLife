@@ -3,6 +3,7 @@ package grid
 import (
 	"fmt"
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -39,17 +40,27 @@ func Regenerate(grid [][]int) [][]int {
 	rows := len(grid)
 	cols := len(grid[0])
 	newGrid := make([][]int, rows)
+
+	var wg sync.WaitGroup
+	wg.Add(rows)
+
 	for i := range grid {
-		newGrid[i] = make([]int, cols)
-		for j := range grid[i] {
-			liveNeighbours := countNeighbours(grid, i, j, rows, cols)
-			if grid[i][j] == 1 && (liveNeighbours == 2 || liveNeighbours == 3) {
-				newGrid[i][j] = 1
-			} else if grid[i][j] == 0 && liveNeighbours == 3 {
-				newGrid[i][j] = 1
+		go func(i int) {
+			defer wg.Done()
+			newGrid[i] = make([]int, cols)
+			for j := range grid[i] {
+				liveNeighbours := countNeighbours(grid, i, j, rows, cols)
+				if grid[i][j] == 1 && (liveNeighbours == 2 || liveNeighbours == 3) {
+					newGrid[i][j] = 1
+				} else if grid[i][j] == 0 && liveNeighbours == 3 {
+					newGrid[i][j] = 1
+				}
 			}
-		}
+		}(i)
+
 	}
+
+	wg.Wait()
 	return newGrid
 }
 
