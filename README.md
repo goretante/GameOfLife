@@ -52,8 +52,3 @@ go run main.go
 ## Dependencies
 - Go 1.18+
 - No third-party packages required
-
-## Planned improvements
-- Usage of goroutines
-- Add keyboard input to pause/quit
-- Creating test case packages and making simple CI/CD pipeline
